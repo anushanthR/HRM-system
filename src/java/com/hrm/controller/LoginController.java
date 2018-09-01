@@ -5,6 +5,8 @@
  */
 package com.hrm.controller;
 
+import com.hrm.data.UserRoleDao;
+import com.hrm.data.UserRoleInterface;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
-
+    UserRoleInterface urDao = new UserRoleDao();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -74,9 +76,9 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        
+        String roleName = null;
         if (username != null && password != null){
-            
+            roleName = urDao.login(username, password);
         }
         
         
