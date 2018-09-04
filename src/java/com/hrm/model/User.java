@@ -15,8 +15,8 @@ public class User {
     String password;
     String email;
     String roleId;
-    
-    
+    String roleName;
+
     public String getUserId() {
         return userId;
     }
@@ -56,6 +56,12 @@ public class User {
     public void setRoleId(String roleId) {
         this.roleId = roleId;
     }
-    
-    
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 }

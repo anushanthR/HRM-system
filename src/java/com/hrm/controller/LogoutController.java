@@ -5,9 +5,6 @@
  */
 package com.hrm.controller;
 
-import com.hrm.data.UserRoleDao;
-import com.hrm.data.UserRoleInterface;
-import com.hrm.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -21,10 +18,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Anushanth
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
-public class LoginController extends HttpServlet {
-
-    UserRoleInterface urDao = new UserRoleDao();
+@WebServlet(name = "LogoutController", urlPatterns = {"/LogoutController"})
+public class LogoutController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +38,10 @@ public class LoginController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginController</title>");
+            out.println("<title>Servlet LogoutController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LogoutController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,7 +59,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /**
@@ -78,27 +73,14 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = null ;
-        String password = null ;
         
-        if("login".equals(request.getParameter("submit"))){
-         username = request.getParameter("username");
-         password = request.getParameter("password");
+        HttpSession session = request.getSession(true);
+        if (session != null) {            
+            session.invalidate();
         }
-        
-        User role;
-        if (!"".equals(username) && !"".equals(password) && username != null && password != null) {
-            role = urDao.login(username, password);
-            HttpSession session = request.getSession(true);
-            session.setAttribute("userName", role.getUserName());            
-            session.setAttribute("userId", role.getUserId());
-            session.setAttribute("roleName", role.getRoleName());
-            
-            
-            request.getRequestDispatcher("UserDashboard.jsp").forward(request, response);
-        } else {
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        }
+       
+        response.sendRedirect("index.jsp");
+
     }
 
     /**

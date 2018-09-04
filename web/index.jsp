@@ -4,7 +4,7 @@
     Author     : Anushanth
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
     <head>        
@@ -14,7 +14,7 @@
         <form id="loginform" name="loginform" action="LoginController" method="post">
             <input type="text" name="username" id="username"/>
             <input type="password" name="password" id="password"/>
-            <button type="submit">Login</button>
+            <button type="submit" name="submit" value="login">Login</button>
         </form>
     </body>
 </html>

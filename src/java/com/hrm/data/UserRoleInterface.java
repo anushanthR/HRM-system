@@ -5,6 +5,8 @@
  */
 package com.hrm.data;
 
+import com.hrm.model.User;
+
 /**
  *
  * @author Anushanth
@@ -18,5 +20,5 @@ public interface UserRoleInterface {
     final static String ROLEID = "roleId";
     final static String ROLENAME = "roleName";
     
-    public String login(String username, String password);
+    public User login(String username, String password);
 }
